@@ -51,7 +51,7 @@
           <a class="nav-link linked" href="index.php?approve">Portofolio</a>
         </li>
         <li class="nav-item active">
-          <a style="color:#fff;" class="nav-link linked" href="profile.php">Profile</a>
+          <a style="color:#fff;" class="nav-link linked" href="detail.php">Profile</a>
         </li>
         <li class="nav-item">
           <a  class="nav-link linked" href="user_password.php">Ubah Password</a>
@@ -60,11 +60,9 @@
           <a class="nav-link linked" href="../../logout.php">Log Out</a>
         </li>
       </ul>
-      <a class="navbar-link" href="profile.php" style="color:black">
-        <?php
+     <?php
         echo $_SESSION['nama'] . " (" . $_SESSION['akses'] . ")";
         ?>
-      </a>
     </div>
   </nav>
 

@@ -60,7 +60,7 @@
           <a  class="nav-link linked" href="index.php?approve">Portofolio</a>
         </li>
         <li class="nav-item">
-          <a  class="nav-link linked" href="profile.php">Profile</a>
+          <a  class="nav-link linked" href="detail.php">Profile</a>
         </li>
         <li class="nav-item active">
           <a style="color:#fff;" class="nav-link linked" href="user_password.php">Ubah Password</a>
@@ -69,11 +69,9 @@
           <a class="nav-link linked" href="../../logout.php">Log Out</a>
         </li>
       </ul>
-      <a class="navbar-link" href="profile.php" style="color:black">
-        <?php
+      <?php
         echo $_SESSION['nama'] . " (" . $_SESSION['akses'] . ")";
         ?>
-      </a>
     </div>
   </nav>
 
@@ -148,14 +146,14 @@
         <div class="form-group">
           <label class="control-label col-sm-2" for="pwbaru">Password Baru</label>
           <div class="col-sm-12">
-            <input type="password" class="form-control" name="pwbaru" placeholder="Password Lama" maxlength=12>
+            <input type="password" class="form-control" name="pwbaru" placeholder="Password Baru" maxlength=12>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="control-label col-sm-12" for="pwd">Konfirmasi Password Lama</label>
+          <label class="control-label col-sm-12" for="pwd">Konfirmasi Password Baru</label>
           <div class="col-sm-12">
-            <input type="password" class="form-control" name="pwd" placeholder="Konfirmasi Password Lama" maxlength=12>
+            <input type="password" class="form-control" name="pwd" placeholder="Konfirmasi Password Baru" maxlength=12>
           </div>
         </div>
 
