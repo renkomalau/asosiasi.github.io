@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Anggota Change Password</title>
+  <title>Profile Anggota</title>
 
   <!-- Custom fonts for this theme -->
   <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -30,15 +30,6 @@
     }
   }
 
-  //menampilkan pesan password salah dan kurang tepat
-  if (isset($_GET['wrong'])) {
-    echo "<script> alert('Password lama tidak cocok'); </script>";
-  }
-
-  if (isset($_GET['mismatch'])) {
-    echo "<script> alert('Password baru tidak cocok dengan konfirmasi'); </script>";
-  }
-
   ?>
 
 </head>
@@ -57,19 +48,19 @@
           <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="portofolio.php">Portofolio</a>
+          <a class="nav-link linked" href="portofolio.php">Portofolio</a>
+        </li>
+        <li class="nav-item active">
+          <a style="color:#fff;" class="nav-link linked" href="detail.php">Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="detail.php">Profile</a>
+          <a  class="nav-link linked" href="user_password.php">Ubah Password</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link linked" href="user_password.php" style="color:#fff;">Ubah Password</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../../logout.php">Log Out</a>
+          <a class="nav-link linked" href="../../logout.php">Log Out</a>
         </li>
       </ul>
-       <?php
+     <?php
         echo $_SESSION['nama'] . " (" . $_SESSION['akses'] . ")";
         ?>
     </div>
@@ -95,7 +86,7 @@
       </div>
 
       <!-- Masthead Subheading -->
-      <p class="masthead-subheading font-weight-light mb-0">Selamat Datang! <?php echo $_SESSION['nama']; ?></p>
+      <p class="masthead-subheading font-weight-light mb-0">Waiting for approvement </p>
 
     </div>
   </header>
@@ -105,7 +96,7 @@
     <div class="container">
 
       <!-- Portfolio Section Heading -->
-      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Ubah Password</h2>
+      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Profile</h2>
 
       <!-- Icon Divider -->
       <div class="divider-custom">
@@ -128,39 +119,52 @@
 
       ?>
       <!-- Portfolio Grid Items -->
-      <form class="form-horizontal" action="ubah_password.php" method="POST">
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="nik">NIK</label>
-          <div class="col-sm-12">
-            <input type="number" class="form-control" id="nik" value=<?php echo $data['nik']; ?> disabled>
+      <div class="card">
+        <div class="card-header">Detail Profile 
+          <div style="float:right">
+          [ <a href="profile.php">Ubah Profile</a> ]
           </div>
         </div>
-
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="pwlama">Password Lama</label>
-          <div class="col-sm-12">
-            <input type="password" class="form-control" name="pwlama" placeholder="Password Lama" maxlength=12>
-          </div>
+        <div class="card-body">
+          <img src="../../img/id-card.png" alt="icon id card" 
+            style="height:200px; margin-left:4%; margin-top: 2%" >
+          <div style="float:right; margin-right:24%">
+           <table border=0>
+            <tr>
+              <td width=250><h3 class="font-weight-light"> NIK </h3></td>
+              <td width=15><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['nik']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> Nama </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['nama']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> Tanggal Lahir </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['ttl']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> Alamat </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['alamat']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> Provinsi </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['provinsi']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> E-mail </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['email']; ?> </h3></td>
+            </tr>
+           </table>
         </div>
-
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="pwbaru">Password Baru</label>
-          <div class="col-sm-12">
-            <input type="password" class="form-control" name="pwbaru" placeholder="Password Baru" maxlength=12>
-          </div>
         </div>
-
-        <div class="form-group">
-          <label class="control-label col-sm-12" for="pwd">Konfirmasi Password Baru</label>
-          <div class="col-sm-12">
-            <input type="password" class="form-control" name="pwd" placeholder="Konfirmasi Password Baru" maxlength=12>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <button type="submit" style="margin-top: 30px; margin-left:40%; width: 30%" class="btn btn-outline-info tmbl">Ubah </button>
-        </div>
-      </form>
+        
+      </div>
       <!-- /.row -->
 
     </div>
