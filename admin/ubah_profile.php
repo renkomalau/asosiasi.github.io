@@ -19,7 +19,7 @@
     $_SESSION['nama'] = $nama;
 
     if($query){
-        header("location:index.php");
+        header("location:detail.php");
     }
 
 

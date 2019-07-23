@@ -61,20 +61,19 @@
 <body id="page-top">
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+  <nav class="navbar navbar-expand navbar-dark bg-info static-top">
 
-    <a class="navbar-brand mr-1" href="index.html">Asosiasi Programmer Indonesia</a>
+  <a class="navbar-brand mr-1" href="index.html"><img src="../img/logo1.png" height="35px" style="background-color:whte;"></a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
 
-    <div class="navbar ml-auto">
-      <a href="http://" class="text-white"><i class="fas fa-fw fa-user-circle"></i>
+    <div class="navbar ml-auto text-white">
+      <i class="fas fa-fw fa-user-circle" style="margin-right:5px"></i>
         <?php
           echo $_SESSION['nama']. " (". $_SESSION['akses'].")";
         ?>
-      </a>
     </div>
 
   </nav>
@@ -133,6 +132,10 @@
         <div class="card-header inline-block">
             <i class="fas fa-list"></i>
             Ubah Password
+            <div style="float:right">
+                [ <a href="detail.php">Lihat Profile</a> ]
+                [ <a href="profile.php">Ubah Profile</a> ]
+              </div>
           </div>
           <div class="card-body">
 
@@ -167,15 +170,15 @@
             <label class="control-label col-sm-2" for="pwbaru">Password Baru</label>
               <div class="col-sm-12">
                 <input type="password" class="form-control" name="pwbaru" 
-                  placeholder="Password Lama" maxlength=12>
+                  placeholder="Password Baru" maxlength=12>
               </div>
             </div>
 
             <div class="form-group">
-            <label class="control-label col-sm-2" for="pwd">Konfirmasi Password Lama</label>
+            <label class="control-label col-sm-5" for="pwd">Konfirmasi Password Baru</label>
               <div class="col-sm-12">
                 <input type="password" class="form-control" name="pwd" 
-                  placeholder="Konfirmasi Password Lama" maxlength=12>
+                  placeholder="Konfirmasi Password Baru" maxlength=12>
               </div>
             </div>
 

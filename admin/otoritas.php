@@ -64,13 +64,12 @@
   <i class="fas fa-bars"></i>
 </button>
 
-<div class="navbar ml-auto">
-  <a href="profile.php" class="text-white"><i class="fas fa-fw fa-user-circle"></i>
-    <?php
-      echo $_SESSION['nama']. " (". $_SESSION['akses'].")";
-    ?>
-  </a>
-</div>
+<div class="navbar ml-auto text-white">
+      <i class="fas fa-fw fa-user-circle" style="margin-right:5px"></i>
+        <?php
+          echo $_SESSION['nama']. " (". $_SESSION['akses'].")";
+        ?>
+    </div>
 
 </nav>
 
@@ -100,7 +99,7 @@
           <span>Hak Akses</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="profile.php">
+        <a class="nav-link" href="detail.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Profile</span></a>
       </li>
