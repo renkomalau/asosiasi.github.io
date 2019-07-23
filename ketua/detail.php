@@ -10,7 +10,7 @@
   <meta name="author" content="">
 
   <?php
-  
+    
       session_start();
   
       if(!isset($_SESSION['akses'])){
@@ -20,33 +20,16 @@
           header("location:../../".$_SESSION['akses']);
         }
       }
-  
 
     
     //mengisi session
     $nik = $_SESSION['nik'];
 
-    //mengecek session
-    if(!isset($_SESSION['akses'])){
-        header("location: ../");
-        $akses = $_SESSION['akses'];
-      if($akses !== "Admin"){
-        header("location: ../".$_SESSION['akses']."/");
-      }
-    }
+  
 
-
-    //menampilkan pesan password salah dan kurang tepat
-    if(isset($_GET['wrong'])){
-      echo "<script> alert('Password lama tidak cocok'); </script>";
-    }
-
-    if(isset($_GET['mismatch'])){
-      echo "<script> alert('Password baru tidak cocok dengan konfirmasi'); </script>";
-    }
   ?>
 
-  <title>Ketua - Password Setting</title>
+  <title>Ketua - Profile</title>
 
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -73,14 +56,14 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand navbar-dark bg-info static-top">
 
-  <a class="navbar-brand mr-1" href="index.php"><img src="../img/logo1.png" height="35px" style="background-color:whte;"></a>
+    <a class="navbar-brand mr-1" href="index.php"><img src="../img/logo1.png" height="35px" style="background-color:whte;"></a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
 
     <div class="navbar ml-auto text-white">
-     <i class="fas fa-fw fa-user-circle" style="margin-right:5px"></i>
+      <i class="fas fa-fw fa-user-circle" style="margin-right:5px"></i>
         <?php
           echo $_SESSION['nama']. " (". $_SESSION['akses'].")";
         ?>
@@ -104,7 +87,7 @@
           <span>Data Anggota</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="profile.php">
+        <a class="nav-link" href="detail.php">
           <i class="fas fa-fw fa-user-alt"></i>
           <span>Profile</span></a>
       </li>
@@ -122,19 +105,19 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="user_password.php">Dashboard</a>
+            <a href="#">Dashboard</a>
           </li>
           <li class="breadcrumb-item active">Profile</li>
         </ol>
 
         <!-- Area Chart Example-->
         <div class="card mb-3">
-          <div class="card-header inline-block">
+        <div class="card-header inline-block">
             <i class="fas fa-list"></i>
             Lihat Profile
               <div style="float:right">
-              [ <a href="detail.php">Lihat Profile</a> ]
                 [ <a href="profile.php">Ubah Profile</a> ]
+                [ <a href="user_password.php">Ubah Password</a> ]
               </div>
           </div>
           <div class="card-body">
@@ -149,45 +132,43 @@
 
           ?>
 
-          <form class="form-horizontal" action="ubah_password.php" method="POST">
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="nik">NIK</label>
-              <div class="col-sm-12">
-                <input type="number" class="form-control" id="nik" 
-                  value=<?php echo $data['nik']; ?> disabled>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="pwlama">Password Lama</label>
-              <div class="col-sm-12">
-                <input type="password" class="form-control" name="pwlama" 
-                  placeholder="Password Lama" maxlength=12>
-              </div>
-            </div>
-
-            <div class="form-group">
-            <label class="control-label col-sm-2" for="pwbaru">Password Baru</label>
-              <div class="col-sm-12">
-                <input type="password" class="form-control" name="pwbaru" 
-                  placeholder="Password Baru" maxlength=12>
-              </div>
-            </div>
-
-            <div class="form-group">
-            <label class="control-label col-sm-5" for="pwd">Konfirmasi Password Baru</label>
-              <div class="col-sm-12">
-                <input type="password" class="form-control" name="pwd" 
-                  placeholder="Konfirmasi Password Baru" maxlength=12>
-              </div>
-            </div>
-
-            <div class="form-group">
-            <button type="submit" class="btn btn-outline-info tmbl">Ubah </button> 
-            </div>
-          </form>
+<img src="../img/id-card.png" alt="icon id card" 
+            style="height:200px; margin-left:4%; margin-top: 2%" >
+          <div style="float:right; margin-right:24%">
+           <table border=0>
+            <tr>
+              <td width=250><h3 class="font-weight-light"> NIK </h3></td>
+              <td width=15><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['nik']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> Nama </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['nama']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> Tanggal Lahir </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['ttl']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> Alamat </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['alamat']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> Provinsi </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['provinsi']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> E-mail </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['email']; ?> </h3></td>
+            </tr>
+           </table>
           </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+          
         </div>
 
 
