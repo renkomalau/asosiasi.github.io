@@ -16,7 +16,7 @@
         nik='$nik'");
     
     if($query){
-        header("location:index.php");
+        header("location:detail.php");
     }else{
         echo "error";   
     }

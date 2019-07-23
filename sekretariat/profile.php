@@ -62,12 +62,11 @@
       <i class="fas fa-bars"></i>
     </button>
 
-    <div class="navbar ml-auto">
-      <a href="profile.php" class="text-white"><i class="fas fa-fw fa-user-circle"></i>
+    <div class="navbar ml-auto text-white">
+      <i class="fas fa-fw fa-user-circle" style="margin-right:5px"></i>
         <?php
           echo $_SESSION['nama']. " (". $_SESSION['akses'].")";
         ?>
-      </a>
     </div>
 
   </nav>
@@ -83,7 +82,7 @@
         </a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="profile.php">
+        <a class="nav-link" href="detail.php">
           <i class="fas fa-fw fa-user-alt"></i>
           <span>Profile</span></a>
       </li>
@@ -112,6 +111,7 @@
             <i class="fas fa-list"></i>
             Lihat Profile
               <div style="float:right">
+                [ <a href="detail.php">Lihat Profile</a> ]
                 [ <a href="user_password.php">Ubah Password</a> ]
               </div>
           </div>
@@ -147,7 +147,7 @@
             <div class="form-group">
               <label class="control-label col-sm-2" for="ttl">Tanggal Lahir</label>
               <div class="col-sm-12">
-                <input type="date " class="form-control" name="ttl" 
+                <input type="date" class="form-control" name="ttl" 
                   value=<?php echo $data['ttl']; ?> >
               </div>
             </div>
