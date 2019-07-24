@@ -10,23 +10,26 @@
   <meta name="author" content="">
 
   <?php
-    $nik = $_GET['nik'];
-
-    //memulai session
-    session_start();
     
-    //mengecek session
-    if(!isset($_SESSION['akses'])){
-        header("location: ../");
-        $akses = $_SESSION['akses'];
-      if($akses !== "Admin"){
-        header("location: ../".$_SESSION['akses']."/");
+      session_start();
+  
+      if(!isset($_SESSION['akses'])){
+        header("location:../../index.php");
+      }else{
+        if($_SESSION['akses'] !== "Sekretariat"){
+          header("location:../../".$_SESSION['akses']);
+        }
       }
-    }
+
+    
+    //mengisi session
+    $nik = $_SESSION['nik'];
+
+  
 
   ?>
 
-  <title>Sekretariat - Dashboard</title>
+  <title>Sekretariat - Profile</title>
 
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -38,10 +41,12 @@
   <link href="../style/sb-admin.css" rel="stylesheet">
 
     <style>
-      .link{
-        color:black;
-      }
+      .tmbl{
+        width:20%;
+        margin-top: 20px;
+        margin-left: 40%;
 
+      }
     </style>
 
 </head>
@@ -57,12 +62,11 @@
       <i class="fas fa-bars"></i>
     </button>
 
-    <div class="navbar ml-auto">
-      <a href="http://" class="text-white"><i class="fas fa-fw fa-user-circle"></i>
+    <div class="navbar ml-auto text-white">
+      <i class="fas fa-fw fa-user-circle" style="margin-right:5px"></i>
         <?php
           echo $_SESSION['nama']. " (". $_SESSION['akses'].")";
         ?>
-      </a>
     </div>
 
   </nav>
@@ -71,14 +75,14 @@
 
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="index.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="profile.php">
+      <li class="nav-item active">
+        <a class="nav-link" href="detail.php">
           <i class="fas fa-fw fa-user-alt"></i>
           <span>Profile</span></a>
       </li>
@@ -98,14 +102,19 @@
           <li class="breadcrumb-item">
             <a href="#">Dashboard</a>
           </li>
-          <li class="breadcrumb-item active">Detail Anggota</li>
+          <li class="breadcrumb-item active">Profile</li>
         </ol>
 
         <!-- Area Chart Example-->
         <div class="card mb-3">
-          <div class="card-header">
+        <div class="card-header inline-block">
             <i class="fas fa-list"></i>
-            Detail Anggota</div>
+            Lihat Profile
+              <div style="float:right">
+                [ <a href="profile.php">Ubah Profile</a> ]
+                [ <a href="user_password.php">Ubah Password</a> ]
+              </div>
+          </div>
           <div class="card-body">
 
           <?php
@@ -118,58 +127,43 @@
 
           ?>
 
-          <form class="form-horizontal" action="/action_page.php">
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="nik">NIK</label>
-              <div class="col-sm-12">
-                <input type="number" class="form-control" id="nik" disabled
-                  value=<?php echo $data['nik']; ?> >
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="nama">Nama</label>
-              <div class="col-sm-12">
-                <input type="text" class="form-control" id="nama" disabled
-                  value=<?php echo $data['nama']; ?> >
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="ttl">Tanggal Lahir</label>
-              <div class="col-sm-12">
-                <input type="text" class="form-control" id="ttl" disabled
-                  value=<?php echo $data['ttl']; ?> >
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="alamat">Alamat</label>
-              <div class="col-sm-12">
-                <textarea class="form-control" cols="30" rows="3" disabled><?php  
-                  echo $data['alamat']; ?></textarea>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="provinsi">Provinsi</label>
-              <div class="col-sm-12">
-                <input type="text" class="form-control" id="nama" disabled
-                  value=<?php echo $data['provinsi']; ?> >
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="email">Email</label>
-              <div class="col-sm-12">
-                <input type="email" class="form-control" disabled
-                  value=<?php echo $data['email']; ?> >
-              </div>
-            </div>
-
-          </form>
+<img src="../img/id-card.png" alt="icon id card" 
+            style="height:200px; margin-left:4%; margin-top: 2%" >
+          <div style="float:right; margin-right:24%">
+           <table border=0>
+            <tr>
+              <td width=250><h3 class="font-weight-light"> NIK </h3></td>
+              <td width=15><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['nik']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> Nama </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['nama']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> Tanggal Lahir </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['ttl']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> Alamat </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['alamat']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> Provinsi </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['provinsi']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> E-mail </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['email']; ?> </h3></td>
+            </tr>
+           </table>
           </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+          
         </div>
 
 

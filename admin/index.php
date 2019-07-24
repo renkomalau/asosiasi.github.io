@@ -82,12 +82,11 @@
       <i class="fas fa-bars"></i>
     </button>
 
-    <div class="navbar ml-auto">
-      <a href="http://" class="text-white"><i class="fas fa-fw fa-user-circle"></i>
+    <div class="navbar ml-auto text-white">
+      <i class="fas fa-fw fa-user-circle" style="margin-right:5px"></i>
         <?php
           echo $_SESSION['nama']. " (". $_SESSION['akses'].")";
         ?>
-      </a>
     </div>
 
   </nav>
@@ -118,7 +117,7 @@
           <span>Hak Akses</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="profile.php">
+        <a class="nav-link" href="detail.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Profile</span></a>
       </li>

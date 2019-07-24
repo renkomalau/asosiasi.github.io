@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Dashboard Anggota</title>
+  <title>Profile Anggota</title>
 
   <!-- Custom fonts for this theme -->
   <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -30,14 +30,6 @@
     }
   }
 
-  if (isset($_GET['pwchanged'])) {
-    echo "<script> alert('Password berhasil diubah'); </script>";
-  }
-
-  if (isset($_GET['approve'])) {
-    echo "<script> alert('Akun anda belum diapprove, harus menunggu persetujuan agar dapat mengisi portofolio'); </script> ";
-  }
-
   ?>
 
 </head>
@@ -52,23 +44,23 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto" style="color:white">
-        <li class="nav-item active">
-          <a style="color:#fff;" class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+        <li class="nav-item">
+          <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link linked" href="index.php?approve">Portofolio</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link linked" href="detail.php">Profile</a>
+        <li class="nav-item active">
+          <a style="color:#fff;" class="nav-link linked" href="detail.php">Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link linked" href="user_password.php">Ubah Password</a>
+          <a  class="nav-link linked" href="user_password.php">Ubah Password</a>
         </li>
         <li class="nav-item">
           <a class="nav-link linked" href="../../logout.php">Log Out</a>
         </li>
       </ul>
-      <?php
+        <?php
         echo $_SESSION['nama'] . " (" . $_SESSION['akses'] . ")";
         ?>
     </div>
@@ -104,7 +96,7 @@
     <div class="container">
 
       <!-- Portfolio Section Heading -->
-      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Maaf</h2>
+      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Profile</h2>
 
       <!-- Icon Divider -->
       <div class="divider-custom">
@@ -115,10 +107,63 @@
         <div class="divider-custom-line"></div>
       </div>
 
-      <!-- Portfolio Grid Items -->
-      <h2 class="page-section-subheading text-center text-uppercase text-secondary mb-0">Akun anda sedang menunggu persetujuan
-        <br> Fitur akan dapat diakses setelah akun disetujui</h2>
+      <?php
+      //koneksi
+      include "../../koneksi.php";
 
+      $nik = $_SESSION['nik'];
+
+      //fetch data
+      $query = mysqli_query($conn, "select * from pengguna where nik='$nik'");
+      $data = mysqli_fetch_array($query);
+
+      ?>
+      <!-- Portfolio Grid Items -->
+      <div class="card">
+        <div class="card-header">Detail Profile 
+          <div style="float:right">
+          [ <a href="profile.php">Ubah Profile</a> ]
+          </div>
+        </div>
+        <div class="card-body">
+          <img src="../../img/id-card.png" alt="icon id card" 
+            style="height:200px; margin-left:4%; margin-top: 2%" >
+          <div style="float:right; margin-right:24%">
+           <table border=0>
+            <tr>
+              <td width=250><h3 class="font-weight-light"> NIK </h3></td>
+              <td width=15><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['nik']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> Nama </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['nama']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> Tanggal Lahir </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['ttl']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> Alamat </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['alamat']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> Provinsi </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['provinsi']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> E-mail </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['email']; ?> </h3></td>
+            </tr>
+           </table>
+        </div>
+        </div>
+      </div>
       <!-- /.row -->
 
     </div>

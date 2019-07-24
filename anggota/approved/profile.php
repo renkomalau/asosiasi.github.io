@@ -17,18 +17,18 @@
 
   <!-- Theme CSS -->
   <link href="../../style/freelancer.min.css" rel="stylesheet">
+  
+    <!-- Prohibited Bypass -->
+    <?php
+    session_start();
 
-  <!-- Prohibited Bypass -->
-  <?php
-  session_start();
-
-  if (!isset($_SESSION['akses'])) {
-    header("location:../../index.php");
-  } else {
-    if ($_SESSION['akses'] !== "Anggota") {
-      header("location:../../" . $_SESSION['akses']);
+    if(!isset($_SESSION['akses'])){
+      header("location:../../index.php");
+    }else{
+      if($_SESSION['akses'] !== "Anggota"){
+        header("location:../../".$_SESSION['akses']);
+      }
     }
-  }
 
   ?>
 
@@ -36,8 +36,8 @@
 
 <body id="page-top">
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color:#9999ff;">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color:#9999ff;">
     <a class="navbar-brand" style="color:white" href="index.php"><img src="../../img/logo1.png" height="35px" style="background-color:whte;"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -45,13 +45,13 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto" style="color:white">
         <li class="nav-item">
-          <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="index.php" >Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="portofolio.php"">Portofolio</a>
+          <a class="nav-link" href="portofolio.php">Portofolio</a>
         </li>
-        <li class=" nav-item">
-            <a class="nav-link active" href="profile.php" style="color:#fff;">Profile</a>
+        <li class="nav-item">
+          <a class="nav-link active" href="detail.php" style="color:#fff;">Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link linked" href="user_password.php">Ubah Password</a>
@@ -60,11 +60,9 @@
           <a class="nav-link" href="../../logout.php">Log Out</a>
         </li>
       </ul>
-      <a class="navbar-link" href="profile.php" style="color:black">
-        <?php
+       <?php
         echo $_SESSION['nama'] . " (" . $_SESSION['akses'] . ")";
         ?>
-      </a>
     </div>
   </nav>
   <!-- Masthead -->
@@ -109,101 +107,105 @@
       </div>
 
       <?php
-      //koneksi
-      include "../../koneksi.php";
+        //koneksi
+        include "../../koneksi.php";
 
-      $nik = $_SESSION['nik'];
+        $nik = $_SESSION['nik'];
 
-      //fetch data
-      $query = mysqli_query($conn, "select * from pengguna where nik='$nik'");
-      $data = mysqli_fetch_array($query);
+        //fetch data
+        $query = mysqli_query($conn, "select * from pengguna where nik='$nik'");
+        $data = mysqli_fetch_array($query);
 
       ?>
-      <!-- Portfolio Grid Items -->
+      <!-- Portfolio Grid Items -->      
       <form class="form-horizontal" action="ubah_profile.php" method="POST">
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="nik">NIK</label>
-          <div class="col-sm-12">
-            <input type="number" class="form-control" id="nik" value=<?php echo $data['nik']; ?> disabled>
-          </div>
-        </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="nik">NIK</label>
+              <div class="col-sm-12">
+                <input type="number" class="form-control" id="nik" 
+                  value=<?php echo $data['nik']; ?> disabled>
+              </div>
+            </div>
 
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="nama">Nama</label>
-          <div class="col-sm-12">
-            <input type="text" class="form-control" name="nama" value=<?php echo $data['nama']; ?>>
-          </div>
-        </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="nama">Nama</label>
+              <div class="col-sm-12">
+                <input type="text" class="form-control" name="nama" 
+                  value=<?php echo $data['nama']; ?> >
+              </div>
+            </div>
 
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="ttl">Tanggal Lahir</label>
-          <div class="col-sm-12">
-            <input type="date" class="form-control" name="ttl" value=<?php echo $data['ttl']; ?>>
-          </div>
-        </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="ttl">Tanggal Lahir</label>
+              <div class="col-sm-12">
+                <input type="date" class="form-control" name="ttl" 
+                  value=<?php echo $data['ttl']; ?> >
+              </div>
+            </div>
 
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="alamat">Alamat</label>
-          <div class="col-sm-12">
-            <textarea class="form-control" cols="30" rows="3" name=alamat><?php
-                                                                          echo $data['alamat']; ?></textarea>
-          </div>
-        </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="alamat">Alamat</label>
+              <div class="col-sm-12">
+                <textarea class="form-control" cols="30" rows="3" name=alamat><?php  
+                  echo $data['alamat']; ?></textarea>
+              </div>
+            </div>
 
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="provinsi">Provinsi</label>
-          <div class="col-sm-12">
-            <select name="provinsi" class="form-control">
-              <option value="<?php echo $data['provinsi']; ?>" selected><?php echo $data['provinsi']; ?></option>
-              <option value="Aceh">Aceh</option>
-              <option value="Sumatera Utara">Sumatera Utara</option>
-              <option value="Sumatera Barat">Sumatera Barat</option>
-              <option value="Riau">Riau</option>
-              <option value="Jambi">Jambi</option>
-              <option value="Sumatera Selatan">Sumatera Selatan</option>
-              <option value="Bengkulu">Bengkulu</option>
-              <option value="Lampung">Lampung</option>
-              <option value="Bangka Belitung">Kep. Bangka Belitung</option>
-              <option value="kepulauan Riau">Kepulauan Riau</option>
-              <option value="Jakarta">Jakarta</option>
-              <option value="Jawa Barat">Jawa Barat</option>
-              <option value="Banten">Banten</option>
-              <option value="Jawa Tengah">Jawa Tengah</option>
-              <option value="Yogyakarta">Yogyakarta</option>
-              <option value="Jawa Timur">Jawa Timur</option>
-              <option value="Kalimantan Barat">Kalimantan Barat</option>
-              <option value="Kalimantan Tengah">Kalimantan Tengah</option>
-              <option value="Kalimantan Selatan">Kalimantan Selatan</option>
-              <option value="Kalimantan Timur">Kalimantan Timur</option>
-              <option value="Kalimantan Utara">Kalimantan Utara</option>
-              <option value="Bali">Bali</option>
-              <option value="Nusa Tenggara Timur">Nusa Tenggara Timur</option>
-              <option value="Nusa Tenggara Barat">Nusa Tenggara Barat</option>
-              <option value="Sulawesi Utara">Sulawesi Utara</option>
-              <option value="Sulawesi Tengah">Sulawesi Tengah</option>
-              <option value="Sulawesi Selatan">Sulawesi Selatan</option>
-              <option value="Sulawesi Tenggara">Sulawesi Tenggara</option>
-              <option value="Sulawesi Barat">Sulawesi Barat</option>
-              <option value="Gorontalo">Gorontalo</option>
-              <option value="Maluku">Maluku</option>
-              <option value="Maluku Utara">Maluku Utara</option>
-              <option value="Papua">Papua</option>
-              <option value="Papua Barat">Papua Barat</option>
-            </select>
-          </div>
-        </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="provinsi">Provinsi</label>
+              <div class="col-sm-12">
+                <select name="provinsi" class="form-control">
+                  <option value="<?php echo $data['provinsi']; ?>" selected><?php echo $data['provinsi']; ?></option>
+                  <option value="Aceh">Aceh</option>
+                  <option value="Sumatera Utara">Sumatera Utara</option>
+                  <option value="Sumatera Barat">Sumatera Barat</option>
+                  <option value="Riau">Riau</option>
+                  <option value="Jambi">Jambi</option>
+                  <option value="Sumatera Selatan">Sumatera Selatan</option>
+                  <option value="Bengkulu">Bengkulu</option>
+                  <option value="Lampung">Lampung</option>
+                  <option value="Bangka Belitung">Kep. Bangka Belitung</option>
+                  <option value="kepulauan Riau">Kepulauan Riau</option>
+                  <option value="Jakarta">Jakarta</option>
+                  <option value="Jawa Barat">Jawa Barat</option>
+                  <option value="Banten">Banten</option>
+                  <option value="Jawa Tengah">Jawa Tengah</option>
+                  <option value="Yogyakarta">Yogyakarta</option>
+                  <option value="Jawa Timur">Jawa Timur</option>
+                  <option value="Kalimantan Barat">Kalimantan Barat</option>
+                  <option value="Kalimantan Tengah">Kalimantan Tengah</option>
+                  <option value="Kalimantan Selatan">Kalimantan Selatan</option>
+                  <option value="Kalimantan Timur">Kalimantan Timur</option>
+                  <option value="Kalimantan Utara">Kalimantan Utara</option>
+                  <option value="Bali">Bali</option>
+                  <option value="Nusa Tenggara Timur">Nusa Tenggara Timur</option>
+                  <option value="Nusa Tenggara Barat">Nusa Tenggara Barat</option>
+                  <option value="Sulawesi Utara">Sulawesi Utara</option>
+                  <option value="Sulawesi Tengah">Sulawesi Tengah</option>
+                  <option value="Sulawesi Selatan">Sulawesi Selatan</option>
+                  <option value="Sulawesi Tenggara">Sulawesi Tenggara</option>
+                  <option value="Sulawesi Barat">Sulawesi Barat</option>
+                  <option value="Gorontalo">Gorontalo</option>
+                  <option value="Maluku">Maluku</option>
+                  <option value="Maluku Utara">Maluku Utara</option>
+                  <option value="Papua">Papua</option>
+                  <option value="Papua Barat">Papua Barat</option>
+                 </select>
+              </div>
+            </div>
 
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="email">Email</label>
-          <div class="col-sm-12">
-            <input type="email" class="form-control" name="email" value=<?php echo $data['email']; ?>>
-          </div>
-        </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="email">Email</label>
+              <div class="col-sm-12">
+                <input type="email" class="form-control" name="email"
+                  value=<?php echo $data['email']; ?> >
+              </div>
+            </div>
 
-        <div class="form-group">
-          <button type="submit" style="margin-top: 30px; margin-left:40%; width: 30%" class="btn btn-outline-info tmbl">Ubah </button>
-        </div>
-      </form>
+            <div class="form-group">
+            <button type="submit" style="margin-top: 30px; margin-left:40%; width: 30%" class="btn btn-outline-info tmbl">Ubah </button> 
+            </div>
+          </form>
       <!-- /.row -->
 
     </div>

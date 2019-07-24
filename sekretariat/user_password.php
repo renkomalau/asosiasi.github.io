@@ -69,12 +69,11 @@
       <i class="fas fa-bars"></i>
     </button>
 
-    <div class="navbar ml-auto">
-      <a href="http://" class="text-white"><i class="fas fa-fw fa-user-circle"></i>
+    <div class="navbar ml-auto text-white">
+      <i class="fas fa-fw fa-user-circle" style="margin-right:5px"></i>
         <?php
           echo $_SESSION['nama']. " (". $_SESSION['akses'].")";
         ?>
-      </a>
     </div>
 
   </nav>
@@ -90,7 +89,7 @@
         </a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="profile.php">
+        <a class="nav-link" href="detail.php">
           <i class="fas fa-fw fa-user-alt"></i>
           <span>Profile</span></a>
       </li>
@@ -118,6 +117,10 @@
         <div class="card-header inline-block">
             <i class="fas fa-list"></i>
             Ubah Password
+            <div style="float:right">
+                [ <a href="detail.php">Lihat Profile</a> ]
+                [ <a href="profile.php">Ubah Profile</a> ]
+              </div>
           </div>
           <div class="card-body">
 
@@ -152,15 +155,15 @@
             <label class="control-label col-sm-2" for="pwbaru">Password Baru</label>
               <div class="col-sm-12">
                 <input type="password" class="form-control" name="pwbaru" 
-                  placeholder="Password Lama" maxlength=12>
+                  placeholder="Password Baru" maxlength=12>
               </div>
             </div>
 
             <div class="form-group">
-            <label class="control-label col-sm-2" for="pwd">Konfirmasi Password Lama</label>
+            <label class="control-label col-sm-5" for="pwd">Konfirmasi Password Baru</label>
               <div class="col-sm-12">
                 <input type="password" class="form-control" name="pwd" 
-                  placeholder="Konfirmasi Password Lama" maxlength=12>
+                  placeholder="Konfirmasi Password Baru" maxlength=12>
               </div>
             </div>
 

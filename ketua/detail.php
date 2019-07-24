@@ -16,7 +16,7 @@
       if(!isset($_SESSION['akses'])){
         header("location:../../index.php");
       }else{
-        if($_SESSION['akses'] !== "Sekretariat"){
+        if($_SESSION['akses'] !== "Ketua"){
           header("location:../../".$_SESSION['akses']);
         }
       }
@@ -29,7 +29,7 @@
 
   ?>
 
-  <title>Sekretariat - Profile</title>
+  <title>Ketua - Profile</title>
 
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -81,6 +81,11 @@
           <span>Dashboard</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="anggota.php">
+          <i class="fas fa-fw fa-users"></i>
+          <span>Data Anggota</span></a>
+      </li>
       <li class="nav-item active">
         <a class="nav-link" href="detail.php">
           <i class="fas fa-fw fa-user-alt"></i>
@@ -111,7 +116,7 @@
             <i class="fas fa-list"></i>
             Lihat Profile
               <div style="float:right">
-                [ <a href="detail.php">Lihat Profile</a> ]
+                [ <a href="profile.php">Ubah Profile</a> ]
                 [ <a href="user_password.php">Ubah Password</a> ]
               </div>
           </div>
@@ -127,96 +132,43 @@
 
           ?>
 
-          <form class="form-horizontal" action="ubah_profile.php" method="POST">
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="nik">NIK</label>
-              <div class="col-sm-12">
-                <input type="number" class="form-control" id="nik" 
-                  value=<?php echo $data['nik']; ?> disabled>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="nama">Nama</label>
-              <div class="col-sm-12">
-                <input type="text" class="form-control" name="nama" 
-                  value=<?php echo $data['nama']; ?> >
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="ttl">Tanggal Lahir</label>
-              <div class="col-sm-12">
-                <input type="date" class="form-control" name="ttl" 
-                  value=<?php echo $data['ttl']; ?> >
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="alamat">Alamat</label>
-              <div class="col-sm-12">
-                <textarea class="form-control" cols="30" rows="3" name=alamat><?php  
-                  echo $data['alamat']; ?></textarea>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="provinsi">Provinsi</label>
-              <div class="col-sm-12">
-                <select name="provinsi" class="form-control">
-                  <option value="<?php echo $data['provinsi']; ?>" selected><?php echo $data['provinsi']; ?></option>
-                  <option value="Aceh">Aceh</option>
-                  <option value="Sumatera Utara">Sumatera Utara</option>
-                  <option value="Sumatera Barat">Sumatera Barat</option>
-                  <option value="Riau">Riau</option>
-                  <option value="Jambi">Jambi</option>
-                  <option value="Sumatera Selatan">Sumatera Selatan</option>
-                  <option value="Bengkulu">Bengkulu</option>
-                  <option value="Lampung">Lampung</option>
-                  <option value="Bangka Belitung">Kep. Bangka Belitung</option>
-                  <option value="kepulauan Riau">Kepulauan Riau</option>
-                  <option value="Jakarta">Jakarta</option>
-                  <option value="Jawa Barat">Jawa Barat</option>
-                  <option value="Banten">Banten</option>
-                  <option value="Jawa Tengah">Jawa Tengah</option>
-                  <option value="Yogyakarta">Yogyakarta</option>
-                  <option value="Jawa Timur">Jawa Timur</option>
-                  <option value="Kalimantan Barat">Kalimantan Barat</option>
-                  <option value="Kalimantan Tengah">Kalimantan Tengah</option>
-                  <option value="Kalimantan Selatan">Kalimantan Selatan</option>
-                  <option value="Kalimantan Timur">Kalimantan Timur</option>
-                  <option value="Kalimantan Utara">Kalimantan Utara</option>
-                  <option value="Bali">Bali</option>
-                  <option value="Nusa Tenggara Timur">Nusa Tenggara Timur</option>
-                  <option value="Nusa Tenggara Barat">Nusa Tenggara Barat</option>
-                  <option value="Sulawesi Utara">Sulawesi Utara</option>
-                  <option value="Sulawesi Tengah">Sulawesi Tengah</option>
-                  <option value="Sulawesi Selatan">Sulawesi Selatan</option>
-                  <option value="Sulawesi Tenggara">Sulawesi Tenggara</option>
-                  <option value="Sulawesi Barat">Sulawesi Barat</option>
-                  <option value="Gorontalo">Gorontalo</option>
-                  <option value="Maluku">Maluku</option>
-                  <option value="Maluku Utara">Maluku Utara</option>
-                  <option value="Papua">Papua</option>
-                  <option value="Papua Barat">Papua Barat</option>
-                 </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="email">Email</label>
-              <div class="col-sm-12">
-                <input type="email" class="form-control" name="email"
-                  value=<?php echo $data['email']; ?> >
-              </div>
-            </div>
-
-            <div class="form-group">
-            <button type="submit" class="btn btn-outline-info tmbl">Ubah </button> 
-            </div>
-          </form>
+<img src="../img/id-card.png" alt="icon id card" 
+            style="height:200px; margin-left:4%; margin-top: 2%" >
+          <div style="float:right; margin-right:24%">
+           <table border=0>
+            <tr>
+              <td width=250><h3 class="font-weight-light"> NIK </h3></td>
+              <td width=15><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['nik']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> Nama </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['nama']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> Tanggal Lahir </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['ttl']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> Alamat </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['alamat']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> Provinsi </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['provinsi']; ?> </h3></td>
+            </tr>
+            <tr>
+              <td><h3 class="font-weight-light"> E-mail </h3></td>
+              <td><h3 class="font-weight-light"> : </h3></td>
+              <td><h3 class="font-weight-light"> <?php echo $data['email']; ?> </h3></td>
+            </tr>
+           </table>
           </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+          
         </div>
 
 
