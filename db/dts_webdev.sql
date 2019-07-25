@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2019 at 09:26 AM
+-- Generation Time: Jul 25, 2019 at 09:37 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `login` (
   `nik` int(10) NOT NULL,
-  `password` varchar(50) NOT NULL
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -38,16 +38,17 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`nik`, `password`) VALUES
-(1, '123456'),
-(1234, '1234'),
-(2222, '2222'),
-(2704, '2704'),
-(3001, '3001'),
-(4321, '4321'),
-(5555, '5555'),
-(8888, '8888'),
-(9898, '9898'),
-(9999, '9999');
+(1, 'e10adc3949ba59abbe56e057f20f883e'),
+(1010, '202cb962ac59075b964b07152d234b70'),
+(1234, '202cb962ac59075b964b07152d234b70'),
+(2222, '202cb962ac59075b964b07152d234b70'),
+(2704, '202cb962ac59075b964b07152d234b70'),
+(3001, '202cb962ac59075b964b07152d234b70'),
+(4321, '202cb962ac59075b964b07152d234b70'),
+(5555, '202cb962ac59075b964b07152d234b70'),
+(8888, '202cb962ac59075b964b07152d234b70'),
+(9898, '202cb962ac59075b964b07152d234b70'),
+(9999, '202cb962ac59075b964b07152d234b70');
 
 -- --------------------------------------------------------
 
@@ -66,6 +67,7 @@ CREATE TABLE `mapping_pengguna` (
 
 INSERT INTO `mapping_pengguna` (`nik`, `id_posisi`) VALUES
 (1, 1),
+(1010, 4),
 (1234, 2),
 (2222, 4),
 (2704, 3),
@@ -99,6 +101,7 @@ CREATE TABLE `pengguna` (
 
 INSERT INTO `pengguna` (`nik`, `nama`, `ttl`, `alamat`, `provinsi`, `email`, `bln_join`, `thn_join`) VALUES
 (1, 'Sultan', '1998-05-20', 'Batu Aji', 'Kepulauan Riau', 'admin@api.ac.id', 'Mar', 2017),
+(1010, 'hahahah', '1778-02-03', 'asdad', 'Kalimantan Barat', 'asd@gmail.com', 'Jul', 2019),
 (1234, 'Agung', '1998-02-12', 'Baloi', 'Kalimantan Barat', 'gunglah@gmail.com', 'Mar', 2017),
 (2222, 'Klkasd', '0000-00-00', 'hkjahskhd', 'Aceh', 'dasd@gmail.com', 'Mar', 2017),
 (2704, 'Deva', '1990-08-25', 'Batu Aji', 'Jawa Timur', 'deva@mail.com', 'Mar', 2017),
@@ -125,6 +128,7 @@ CREATE TABLE `persetujuan` (
 --
 
 INSERT INTO `persetujuan` (`nik`, `status`) VALUES
+(1010, 'belum disetujui'),
 (2222, 'disetujui'),
 (2704, 'disetujui'),
 (4321, 'disetujui'),
