@@ -114,7 +114,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
+            <a href="index.php">Dashboard</a>
           </li>
           <li class="breadcrumb-item active">Hak Akses</li>
         </ol>
@@ -152,7 +152,7 @@
                     <td class="text-center"><?php echo $data['nama']; ?></td>
                     <td class="text-center"><?php echo $data['email']; ?></td>
                     <td class="text-center"><?php echo $status['nama_posisi']; ?></td>
-                    <td class="text-center"><a style="margin-right:15px" href="ubah_hakakses.php?nik=<?php echo $data['nik']; ?>">Ubah</a>
+                    <td class="text-center"><a style="margin-right:15px" href="ubah_hakakses.php?nik=<?php echo $data['nik']; ?>" class="btn btn-info">Ubah</a>
                   </tr>
               <?php } ?>
         </tbody>

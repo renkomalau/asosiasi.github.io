@@ -126,8 +126,8 @@
             <i class="fas fa-list"></i>
             Lihat Profile
               <div style="float:right">
-                [ <a href="profile.php">Ubah Profile</a> ]
-                [ <a href="user_password.php">Ubah Password</a> ]
+                <a href="profile.php" class="btn btn-primary mr-2">Ubah Profile</a> 
+                <a href="user_password.php" class="btn btn-primary">Ubah Password</a> 
               </div>
           </div>
           <div class="card-body">

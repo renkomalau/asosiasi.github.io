@@ -76,7 +76,7 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand navbar-light bg-info static-top">
 
-    <a class="navbar-brand mr-1" href="index.html"><img src="../img/logo1.png" height="35px" style="background-color:whte;"></a>
+    <a class="navbar-brand mr-1" href="index.php"><img src="../img/logo1.png" height="35px" style="background-color:whte;"></a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
