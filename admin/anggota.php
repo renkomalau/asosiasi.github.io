@@ -14,7 +14,7 @@
     session_start();
 
     //include db
-    include "../koneksi.php";
+    include "../koneksi.php"; 
     
     //mengecek session
     if(!isset($_SESSION['nik'])){
@@ -156,8 +156,8 @@
                     <td class="text-center"><?php echo $data['provinsi']; ?></td>
                     <td class="text-center"><?php echo $data['email']; ?></td>
                     <td class="text-center"><?php echo $status['status']; ?></td>
-                    <td class="text-center"><a style="margin-right:15px" href="detail.php?nik=<?php echo $data['nik']; ?>">Detail</a>
-                    <a href="delete_anggota.php?nik=<?php echo $data['nik']; ?>">Hapus</a></td>
+                    <td class="text-center"><a style="margin-right:15px" href="detail.php?nik=<?php echo $data['nik']; ?>" class="btn btn-primary">Detail</a>
+                    <a href="delete_anggota.php?nik=<?php echo $data['nik']; ?>" class="btn btn-danger" onclick="javascript:return confirm('Hapus Data ?');">Hapus</a></td>
                   </tr>
               <?php } ?>
         </tbody>

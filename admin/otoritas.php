@@ -162,7 +162,7 @@
                   <td class="text-center"><?php echo $data['provinsi']; ?></td>
                   <td class="text-center"><?php echo $data['email']; ?></td>
                   <td class="text-center"><?php echo $status['nama_posisi']; ?></td>
-                  <td class="text-center"><a href="delete_otoritas.php?nik=<?php echo $data['nik']; ?>">Hapus</a></td>
+                  <td class="text-center"><a href="delete_otoritas.php?nik=<?php echo $data['nik']; ?>" class="btn btn-danger" onclick="javascript:return confirm('Hapus Data ?');">Hapus</a></td>
                 </tr>
             <?php } ?>
       </tbody>
