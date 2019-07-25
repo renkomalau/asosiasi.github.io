@@ -5,7 +5,7 @@
 
     $nama=$_POST['nama'];
     $provinsi = $_POST['provinsi'];
-    $password = $_POST['pwd'];
+    $password = md5($_POST['pwd']);
     $email = $_POST['email'];
     $ttl = $_POST['TTL'];
     $alamat = $_POST['alamat'];
@@ -30,7 +30,7 @@
         return false;
     }
 
-    if ($password !== $_POST['pw']){
+    if ($_POST['pwd'] !== $_POST['pw']){
         header("location: register.php?gagal");
     }else{
         echo "$nik  $nama $ttl $alamat $provinsi $email";
