@@ -10,25 +10,20 @@
   <meta name="author" content="">
 
   <?php
-    //koneksi database
-    include "../koneksi.php";
+    $nik = $_GET['nik'];
 
-   
-      session_start();
-  
-      if(!isset($_SESSION['akses'])){
-        header("location:../../index.php");
-      }else{
-        if($_SESSION['akses'] !== "Sekretariat"){
-          header("location:../../".$_SESSION['akses']);
-        }
+    //memulai session
+    session_start();
+    
+    //mengecek session
+    if(!isset($_SESSION['akses'])){
+        header("location: ../");
+        $akses = $_SESSION['akses'];
+      if($akses !== "Admin"){
+        header("location: ../".$_SESSION['akses']."/");
       }
-
-    $nik=$_SESSION['nik'];
-
-    if(isset($_GET['pwchanged'])){
-      echo "<script> alert('Password berhasil diubah'); </script>";
     }
+
   ?>
 
   <title>Sekretariat - Dashboard</title>
@@ -42,26 +37,17 @@
   <!-- Custom styles for this template-->
   <link href="../style/sb-admin.css" rel="stylesheet">
 
+    <style>
+      .link{
+        color:black;
+      }
 
-    <!-- test datatable -->
-    <script src="../js/jquery-3.3.1.js"></script>
-    <script src="../js/jquery.dataTables.min.js"></script>
-    <script src="../js/dataTables.bootstrap4.min.js"></script>
-
-      <link rel="stylesheet" href="../style/bootstrap.css">
-      <link rel="stylesheet" href="../style/dataTables.bootstrap4.min.css">
-
-    <script>
-      $(document).ready(function() {
-        $('#example').DataTable();
-      } );
-    </script>
+    </style>
 
 </head>
 
 <body id="page-top">
 
-  <!-- navigation -->
   <!-- Navbar -->
   <nav class="navbar navbar-expand navbar-dark bg-info static-top">
 
@@ -71,11 +57,12 @@
       <i class="fas fa-bars"></i>
     </button>
 
-    <div class="navbar ml-auto text-white">
-      <i class="fas fa-fw fa-user-circle" style="margin-right:5px"></i>
+    <div class="navbar ml-auto">
+      <a href="http://" class="text-white"><i class="fas fa-fw fa-user-circle"></i>
         <?php
           echo $_SESSION['nama']. " (". $_SESSION['akses'].")";
         ?>
+      </a>
     </div>
 
   </nav>
@@ -111,51 +98,76 @@
           <li class="breadcrumb-item">
             <a href="#">Dashboard</a>
           </li>
-          <li class="breadcrumb-item active">Data Anggota</li>
+          <li class="breadcrumb-item active">Detail Anggota</li>
         </ol>
 
         <!-- Area Chart Example-->
         <div class="card mb-3">
           <div class="card-header">
-            <i class="fas fa-table"></i>
-            Data Table Anggota</div>
+            <i class="fas fa-list"></i>
+            Detail Anggota</div>
           <div class="card-body">
-          <table id="example" class="table table-striped table-bordered" style="width:100%">
-        <thead>
-            <tr>
-                <th class="text-center">No</th>
-                <th class="text-center">NIK</th>
-                <th class="text-center">Nama</th>
-                <th class="text-center">Status</th>
-                <th class="text-center">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-              $data_anggota = mysqli_query($conn, "select p.nik, a.nama, p.status from persetujuan p,
-              pengguna a where p.nik = a.nik and p.status='belum disetujui' order by p.nik");
-              $no = 1;
-              while($data = mysqli_fetch_array($data_anggota)){ ?>
-                  <tr>
-                    <td class="text-center"><?php echo $no++ ?></td>
-                    <td class="text-center"><?php echo $data['nik']; ?></td>
-                    <td class="text-center"><?php echo $data['nama']; ?></td>
-                    <td class="text-center"><?php echo $data['status']; ?></td>
-                    <td class="text-center"><a style="margin-right:15px" href="detail_anggota.php?nik=<?php echo $data['nik']; ?>">Detail</a><a href="approve.php?nik=<?php echo $data['nik']; ?>">Approve</a></td>
-                  </tr>
-              <?php } ?>
-        </tbody>
-        <tfoot>
-            <tr>
-                <th class="text-center">No</th>
-                <th class="text-center">NIK</th>
-                <th class="text-center">Nama</th>
-                <th class="text-center">Status</th>
-                <th class="text-center">Action</th>
-            </tr>
-        </tfoot>
-    </table>
 
+          <?php
+            //koneksi
+            include "../koneksi.php";
+
+            //fetch data
+            $query = mysqli_query($conn, "select * from pengguna where nik='$nik'");
+            $data = mysqli_fetch_array($query);
+
+          ?>
+
+          <form class="form-horizontal" action="/action_page.php">
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="nik">NIK</label>
+              <div class="col-sm-12">
+                <input type="number" class="form-control" id="nik" disabled
+                  value=<?php echo $data['nik']; ?> >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="nama">Nama</label>
+              <div class="col-sm-12">
+                <input type="text" class="form-control" id="nama" disabled
+                  value=<?php echo $data['nama']; ?> >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="ttl">Tanggal Lahir</label>
+              <div class="col-sm-12">
+                <input type="text" class="form-control" id="ttl" disabled
+                  value=<?php echo $data['ttl']; ?> >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="alamat">Alamat</label>
+              <div class="col-sm-12">
+                <textarea class="form-control" cols="30" rows="3" disabled><?php  
+                  echo $data['alamat']; ?></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="provinsi">Provinsi</label>
+              <div class="col-sm-12">
+                <input type="text" class="form-control" id="nama" disabled
+                  value=<?php echo $data['provinsi']; ?> >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="email">Email</label>
+              <div class="col-sm-12">
+                <input type="email" class="form-control" disabled
+                  value=<?php echo $data['email']; ?> >
+              </div>
+            </div>
+
+          </form>
           </div>
           <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
         </div>
@@ -208,11 +220,12 @@
   <script src="../js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Page level plugin JavaScript-->
-  <script src="../vendor/datatables/jquery.dataTables.js"></script>
-  <script src="../vendor/datatables/dataTables.bootstrap4.js"></script>
+  <script src="vendor/chart.js/Chart.min.js"></script>
+  <script src="vendor/datatables/jquery.dataTables.js"></script>
+  <script src="../dataTables.bootstrap4.js"></script>
 
   <!-- Custom scripts for all pages-->
   <script src="../js/sb-admin.min.js"></script>
@@ -222,4 +235,5 @@
   <script src="js/demo/chart-area-demo.js"></script>
 
 </body>
+
 </html>
