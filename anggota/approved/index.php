@@ -55,7 +55,7 @@
           <a class="nav-link" href="portofolio.php">Portofolio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="detail.php.php">Profile</a>
+          <a class="nav-link" href="detail.php">Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link linked" href="user_password.php">Ubah Password</a>
