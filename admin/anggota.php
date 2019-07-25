@@ -10,17 +10,17 @@
   <meta name="author" content="">
 
   <?php
-    //memulai session
-    session_start();
+  //memulai session
+  session_start();
 
-    //include db
-    include "../koneksi.php"; 
-    
-    //mengecek session
-    if(!isset($_SESSION['nik'])){
-      header("location:../index.php");
-    }
-    $nik=$_SESSION['nik'];
+  //include db
+  include "../koneksi.php";
+
+  //mengecek session
+  if (!isset($_SESSION['nik'])) {
+    header("location:../index.php");
+  }
+  $nik = $_SESSION['nik'];
   ?>
 
   <title>Admin - Data Anggota</title>
@@ -39,36 +39,36 @@
 
   <script src="../js/jquery.dataTables.min.js"></script>
   <script src="../js/dataTables.bootstrap4.min.js"></script>
-  
-  
-    <link rel="stylesheet" href="../style/bootstrap.css">
-    <link rel="stylesheet" href="../style/dataTables.bootstrap4.min.css">
+
+
+  <link rel="stylesheet" href="../style/bootstrap.css">
+  <link rel="stylesheet" href="../style/dataTables.bootstrap4.min.css">
 
   <script>
     $(document).ready(function() {
       $('#example').DataTable();
-    } );
+    });
   </script>
 </head>
 
 <body id="page-top">
 
-<nav class="navbar navbar-expand navbar-dark bg-info static-top">
+  <nav class="navbar navbar-expand navbar-dark bg-info static-top">
+    <!-- logo -->
+    <a class="navbar-brand mr-1" href="index.php"><img src="../img/logo1.png" height="35px" style="background-color:whte;"></a>
 
-<a class="navbar-brand mr-1" href="index.php"><img src="../img/logo1.png" height="35px" style="background-color:whte;"></a>
+    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+      <i class="fas fa-bars"></i>
+    </button>
 
-<button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-  <i class="fas fa-bars"></i>
-</button>
-
-<div class="navbar ml-auto text-white">
+    <div class="navbar ml-auto text-white">
       <i class="fas fa-fw fa-user-circle" style="margin-right:5px"></i>
-        <?php
-          echo $_SESSION['nama']. " (". $_SESSION['akses'].")";
-        ?>
+      <?php
+      echo $_SESSION['nama'] . " (" . $_SESSION['akses'] . ")";
+      ?>
     </div>
 
-</nav>
+  </nav>
 
   <div id="wrapper">
 
@@ -125,28 +125,28 @@
             <i class="fas fa-table"></i>
             Data Table Anggota</div>
           <div class="card-body">
-          <table id="example" class="table table-striped table-bordered" style="width:100%">
-        <thead>
-            <tr>
-                <th class="text-center">No</th>
-                <th class="text-center">NIK</th>
-                <th class="text-center">Nama</th>
-                <th class="text-center">TTL</th>
-                <th class="text-center">Provinsi</th>
-                <th class="text-center">Email</th>
-                <th class="text-center">Status</th>
-                <th class="text-center">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-              $data_anggota = mysqli_query($conn, "SELECT * from pengguna where nik in (select nik from 
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
+              <thead>
+                <tr>
+                  <th class="text-center">No</th>
+                  <th class="text-center">NIK</th>
+                  <th class="text-center">Nama</th>
+                  <th class="text-center">TTL</th>
+                  <th class="text-center">Provinsi</th>
+                  <th class="text-center">Email</th>
+                  <th class="text-center">Status</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $data_anggota = mysqli_query($conn, "SELECT * from pengguna where nik in (select nik from 
               mapping_pengguna where id_posisi = 4)");
-              $no = 1;
-              while($data = mysqli_fetch_array($data_anggota)){ 
-                    $nomor = $data['nik'];
-                    $data_status = mysqli_query($conn, "select * FROM persetujuan where nik='$nomor'");
-                    $status = mysqli_fetch_array($data_status);
+                $no = 1;
+                while ($data = mysqli_fetch_array($data_anggota)) {
+                  $nomor = $data['nik'];
+                  $data_status = mysqli_query($conn, "select * FROM persetujuan where nik='$nomor'");
+                  $status = mysqli_fetch_array($data_status);
                   ?>
                   <tr>
                     <td class="text-center"><?php echo $no++ ?></td>
@@ -156,24 +156,24 @@
                     <td class="text-center"><?php echo $data['provinsi']; ?></td>
                     <td class="text-center"><?php echo $data['email']; ?></td>
                     <td class="text-center"><?php echo $status['status']; ?></td>
-                    <td class="text-center"><a style="margin-right:15px" href="detail.php?nik=<?php echo $data['nik']; ?>" class="btn btn-primary">Detail</a>
-                    <a href="delete_anggota.php?nik=<?php echo $data['nik']; ?>" class="btn btn-danger" onclick="javascript:return confirm('Hapus Data ?');">Hapus</a></td>
+                    <td class="text-center"><a style="margin-right:15px" href="detail_anggota.php?nik=<?php echo $data['nik']; ?>" class="btn btn-primary">Detail</a>
+                      <a href="delete_anggota.php?nik=<?php echo $data['nik']; ?>" class="btn btn-danger" onclick="javascript:return confirm('Hapus Data ?');">Hapus</a></td>
                   </tr>
-              <?php } ?>
-        </tbody>
-        <tfoot>
-        <tr>
-            <th class="text-center">No</th>
-            <th class="text-center">NIK</th>
-            <th class="text-center">Nama</th>
-            <th class="text-center">TTL</th>
-            <th class="text-center">Provinsi</th>
-            <th class="text-center">Email</th>
-            <th class="text-center">Status</th>
-            <th class="text-center">Action</th>
-        </tr>
-            </tfoot>
-    </table>
+                <?php } ?>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th class="text-center">No</th>
+                  <th class="text-center">NIK</th>
+                  <th class="text-center">Nama</th>
+                  <th class="text-center">TTL</th>
+                  <th class="text-center">Provinsi</th>
+                  <th class="text-center">Email</th>
+                  <th class="text-center">Status</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </tfoot>
+            </table>
           </div>
           <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
         </div>

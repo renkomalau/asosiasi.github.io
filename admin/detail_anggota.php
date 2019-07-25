@@ -50,8 +50,8 @@
 
   <!-- Navbar -->
   <nav class="navbar navbar-expand navbar-dark bg-info static-top">
-    
-  <a class="navbar-brand mr-1" href="index.php"><img src="../img/logo1.png" height="35px" style="background-color:whte;"></a>
+    <!--logo  -->
+    <a class="navbar-brand mr-1" href="index.php"><img src="../img/logo1.png" height="35px" style="background-color:whte;"></a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
@@ -82,12 +82,12 @@
           <i class="fas fa-fw fa-briefcase"></i>
           <span>Data Otoritas</span></a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="anggota.php">
           <i class="fas fa-fw fa-users"></i>
           <span>Data Anggota</span></a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="hak_akses.php">
           <i class="fas fa-fw fa-mask"></i>
           <span>Hak Akses</span></a>
@@ -104,7 +104,6 @@
       </li>
     </ul>
 
-<!-- content -->
     <div id="content-wrapper">
 
       <div class="container-fluid">
@@ -114,7 +113,7 @@
           <li class="breadcrumb-item">
             <a href="index.php">Dashboard</a>
           </li>
-          <li class="breadcrumb-item active">Ubah Hak Akses</li>
+          <li class="breadcrumb-item active">Detail Anggota</li>
         </ol>
 
         <!-- Area Chart Example-->
@@ -132,39 +131,57 @@
             $query = mysqli_query($conn, "select * from pengguna where nik='$nik'");
             $data = mysqli_fetch_array($query);
 
-            $posisi = mysqli_query($conn, "select * from posisi where id_posisi = 
-              (select id_posisi from mapping_pengguna where nik='$nik')");
-            $id = mysqli_fetch_array($posisi);
           ?>
 
-          <form class="form-horizontal" action="ubah_otoritas.php" method="POST">
+          <form class="form-horizontal" action="/action_page.php">
             <div class="form-group">
               <label class="control-label col-sm-2" for="nik">NIK</label>
               <div class="col-sm-12">
                 <input type="number" class="form-control" id="nik" disabled
                   value=<?php echo $data['nik']; ?> >
-                  <input type="hidden" class="form-control" name="nik"
-                  value=<?php echo $data['nik']; ?> >
               </div>
             </div>
 
             <div class="form-group">
-              <label class="control-label col-sm-2" for="otoritas">Otoritas</label>
+              <label class="control-label col-sm-2" for="nama">Nama</label>
               <div class="col-sm-12">
-                <select name="otoritas" id="" class="form-control">
-                  <option value="<?php echo $id['id_posisi']; ?>" selected><?php echo $id['nama_posisi']; ?></option>
-                  <option value="1">Admin</option>
-                  <option value="2">Ketua</option>
-                  <option value="3">Sekretariat</option>
-                  <option value="4">Anggota</option>
-                </select>
+                <input type="text" class="form-control" id="nama" disabled
+                  value=<?php echo $data['nama']; ?> >
               </div>
             </div>
 
             <div class="form-group">
-              <button type="submit" class="btn btn-outline-info"
-              style="margin-top:30px; width:15%; margin-left: 40%"><i class="fas fa-save" style="margin-right:10px"></i>Submit</button>
+              <label class="control-label col-sm-2" for="ttl">Tanggal Lahir</label>
+              <div class="col-sm-12">
+                <input type="text" class="form-control" id="ttl" disabled
+                  value=<?php echo $data['ttl']; ?> >
+              </div>
             </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="alamat">Alamat</label>
+              <div class="col-sm-12">
+                <textarea class="form-control" cols="30" rows="3" disabled><?php  
+                  echo $data['alamat']; ?></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="provinsi">Provinsi</label>
+              <div class="col-sm-12">
+                <input type="text" class="form-control" id="nama" disabled
+                  value=<?php echo $data['provinsi']; ?> >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="email">Email</label>
+              <div class="col-sm-12">
+                <input type="email" class="form-control" disabled
+                  value=<?php echo $data['email']; ?> >
+              </div>
+            </div>
+
           </form>
           </div>
           <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>

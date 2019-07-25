@@ -122,9 +122,9 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
+            <a href="index.php">Dashboard</a>
           </li>
-          <li class="breadcrumb-item active">Profile</li>
+          <li class="breadcrumb-item active">Ubah Password</li>
         </ol>
 
         <!-- Area Chart Example-->
@@ -133,8 +133,8 @@
             <i class="fas fa-list"></i>
             Ubah Password
             <div style="float:right">
-                [ <a href="detail.php">Lihat Profile</a> ]
-                [ <a href="profile.php">Ubah Profile</a> ]
+            <a href="detail.php" class="btn btn-primary mr-2">Lihat Profile</a>
+            <a href="profile.php" class="btn btn-primary">Ubah Profile</a>
               </div>
           </div>
           <div class="card-body">
