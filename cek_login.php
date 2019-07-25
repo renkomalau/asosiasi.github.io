@@ -4,7 +4,7 @@
 
     //mengambil nik dan password yang telah diketik
     $user=$_POST['nik'];
-    $pass=$_POST['password'];
+    $pass=md5($_POST['password']);
 
     //mencocokkan data dengan nik dan password di database
     $data=mysqli_query($conn, "select * from login where nik='$user' and password='$pass'");
