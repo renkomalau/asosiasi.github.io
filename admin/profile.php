@@ -10,22 +10,22 @@
   <meta name="author" content="">
 
   <?php
-    
-      session_start();
-  
-      if(!isset($_SESSION['akses'])){
-        header("location:../../index.php");
-      }else{
-        if($_SESSION['akses'] !== "Admin"){
-          header("location:../".$_SESSION['akses']);
-        }
-      }
 
-    
-    //mengisi session
-    $nik = $_SESSION['nik'];
+  session_start();
 
-  
+  if (!isset($_SESSION['akses'])) {
+    header("location:../../index.php");
+  } else {
+    if ($_SESSION['akses'] !== "Admin") {
+      header("location:../" . $_SESSION['akses']);
+    }
+  }
+
+
+  //mengisi session
+  $nik = $_SESSION['nik'];
+
+
 
   ?>
 
@@ -40,14 +40,14 @@
   <!-- Custom styles for this template-->
   <link href="../style/sb-admin.css" rel="stylesheet">
 
-    <style>
-      .tmbl{
-        width:20%;
-        margin-top: 20px;
-        margin-left: 40%;
+  <style>
+    .tmbl {
+      width: 20%;
+      margin-top: 20px;
+      margin-left: 40%;
 
-      }
-    </style>
+    }
+  </style>
 
 </head>
 
@@ -56,7 +56,7 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand navbar-dark bg-info static-top">
 
-  <a class="navbar-brand mr-1" href="index.html"><img src="../img/logo1.png" height="35px" style="background-color:whte;"></a>
+    <a class="navbar-brand mr-1" href="index.html"><img src="../img/logo1.png" height="35px" style="background-color:whte;"></a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
@@ -64,9 +64,9 @@
 
     <div class="navbar ml-auto text-white">
       <i class="fas fa-fw fa-user-circle" style="margin-right:5px"></i>
-        <?php
-          echo $_SESSION['nama']. " (". $_SESSION['akses'].")";
-        ?>
+      <?php
+      echo $_SESSION['nama'] . " (" . $_SESSION['akses'] . ")";
+      ?>
     </div>
 
   </nav>
@@ -122,17 +122,17 @@
 
         <!-- Area Chart Example-->
         <div class="card mb-3">
-        <div class="card-header inline-block">
+          <div class="card-header inline-block">
             <i class="fas fa-list"></i>
             Lihat Profile
-              <div style="float:right">
-              <a href="detail.php" class="btn btn-primary mr-2">Lihat Profile</a> 
+            <div style="float:right">
+              <a href="detail.php" class="btn btn-primary mr-2">Lihat Profile</a>
               <a href="user_password.php" class="btn btn-primary">Ubah Password</a>
-              </div>
+            </div>
           </div>
           <div class="card-body">
 
-          <?php
+            <?php
             //koneksi
             include "../koneksi.php";
 
@@ -140,98 +140,94 @@
             $query = mysqli_query($conn, "select * from pengguna where nik='$nik'");
             $data = mysqli_fetch_array($query);
 
-          ?>
+            ?>
 
-          <form class="form-horizontal" action="ubah_profile.php" method="POST">
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="nik">NIK</label>
-              <div class="col-sm-12">
-                <input type="number" class="form-control" id="nik" 
-                  value=<?php echo $data['nik']; ?> disabled>
+            <form class="form-horizontal" action="ubah_profile.php" method="POST">
+              <div class="table table-striped">
+                <label class="control-label col-sm-2" for="nik">NIK</label>
+                <div class="col-sm-12">
+                  <input type="number" class="form-control" id="nik" value=<?php echo $data['nik']; ?> disabled>
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="nama">Nama</label>
-              <div class="col-sm-12">
-                <input type="text" class="form-control" name="nama" 
-                  value=<?php echo $data['nama']; ?> >
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="nama">Nama</label>
+                <div class="col-sm-12">
+                  <input type="text" class="form-control" name="nama" value=<?php echo $data['nama']; ?>>
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="ttl">Tanggal Lahir</label>
-              <div class="col-sm-12">
-                <input type="date" class="form-control" name="ttl" 
-                  value=<?php echo $data['ttl']; ?> >
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="ttl">Tanggal Lahir</label>
+                <div class="col-sm-12">
+                  <input type="date" class="form-control" name="ttl" value=<?php echo $data['ttl']; ?>>
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="alamat">Alamat</label>
-              <div class="col-sm-12">
-                <textarea class="form-control" cols="30" rows="3" name=alamat><?php  
-                  echo $data['alamat']; ?></textarea>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="alamat">Alamat</label>
+                <div class="col-sm-12">
+                  <textarea class="form-control" cols="30" rows="3" name=alamat><?php
+                                                                                echo $data['alamat']; ?></textarea>
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="provinsi">Provinsi</label>
-              <div class="col-sm-12">
-                <select name="provinsi" class="form-control">
-                  <option value="<?php echo $data['provinsi']; ?>" selected><?php echo $data['provinsi']; ?></option>
-                  <option value="Aceh">Aceh</option>
-                  <option value="Sumatera Utara">Sumatera Utara</option>
-                  <option value="Sumatera Barat">Sumatera Barat</option>
-                  <option value="Riau">Riau</option>
-                  <option value="Jambi">Jambi</option>
-                  <option value="Sumatera Selatan">Sumatera Selatan</option>
-                  <option value="Bengkulu">Bengkulu</option>
-                  <option value="Lampung">Lampung</option>
-                  <option value="Bangka Belitung">Kep. Bangka Belitung</option>
-                  <option value="kepulauan Riau">Kepulauan Riau</option>
-                  <option value="Jakarta">Jakarta</option>
-                  <option value="Jawa Barat">Jawa Barat</option>
-                  <option value="Banten">Banten</option>
-                  <option value="Jawa Tengah">Jawa Tengah</option>
-                  <option value="Yogyakarta">Yogyakarta</option>
-                  <option value="Jawa Timur">Jawa Timur</option>
-                  <option value="Kalimantan Barat">Kalimantan Barat</option>
-                  <option value="Kalimantan Tengah">Kalimantan Tengah</option>
-                  <option value="Kalimantan Selatan">Kalimantan Selatan</option>
-                  <option value="Kalimantan Timur">Kalimantan Timur</option>
-                  <option value="Kalimantan Utara">Kalimantan Utara</option>
-                  <option value="Bali">Bali</option>
-                  <option value="Nusa Tenggara Timur">Nusa Tenggara Timur</option>
-                  <option value="Nusa Tenggara Barat">Nusa Tenggara Barat</option>
-                  <option value="Sulawesi Utara">Sulawesi Utara</option>
-                  <option value="Sulawesi Tengah">Sulawesi Tengah</option>
-                  <option value="Sulawesi Selatan">Sulawesi Selatan</option>
-                  <option value="Sulawesi Tenggara">Sulawesi Tenggara</option>
-                  <option value="Sulawesi Barat">Sulawesi Barat</option>
-                  <option value="Gorontalo">Gorontalo</option>
-                  <option value="Maluku">Maluku</option>
-                  <option value="Maluku Utara">Maluku Utara</option>
-                  <option value="Papua">Papua</option>
-                  <option value="Papua Barat">Papua Barat</option>
-                 </select>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="provinsi">Provinsi</label>
+                <div class="col-sm-12">
+                  <select name="provinsi" class="form-control">
+                    <option value="<?php echo $data['provinsi']; ?>" selected><?php echo $data['provinsi']; ?></option>
+                    <option value="Aceh">Aceh</option>
+                    <option value="Sumatera Utara">Sumatera Utara</option>
+                    <option value="Sumatera Barat">Sumatera Barat</option>
+                    <option value="Riau">Riau</option>
+                    <option value="Jambi">Jambi</option>
+                    <option value="Sumatera Selatan">Sumatera Selatan</option>
+                    <option value="Bengkulu">Bengkulu</option>
+                    <option value="Lampung">Lampung</option>
+                    <option value="Bangka Belitung">Kep. Bangka Belitung</option>
+                    <option value="kepulauan Riau">Kepulauan Riau</option>
+                    <option value="Jakarta">Jakarta</option>
+                    <option value="Jawa Barat">Jawa Barat</option>
+                    <option value="Banten">Banten</option>
+                    <option value="Jawa Tengah">Jawa Tengah</option>
+                    <option value="Yogyakarta">Yogyakarta</option>
+                    <option value="Jawa Timur">Jawa Timur</option>
+                    <option value="Kalimantan Barat">Kalimantan Barat</option>
+                    <option value="Kalimantan Tengah">Kalimantan Tengah</option>
+                    <option value="Kalimantan Selatan">Kalimantan Selatan</option>
+                    <option value="Kalimantan Timur">Kalimantan Timur</option>
+                    <option value="Kalimantan Utara">Kalimantan Utara</option>
+                    <option value="Bali">Bali</option>
+                    <option value="Nusa Tenggara Timur">Nusa Tenggara Timur</option>
+                    <option value="Nusa Tenggara Barat">Nusa Tenggara Barat</option>
+                    <option value="Sulawesi Utara">Sulawesi Utara</option>
+                    <option value="Sulawesi Tengah">Sulawesi Tengah</option>
+                    <option value="Sulawesi Selatan">Sulawesi Selatan</option>
+                    <option value="Sulawesi Tenggara">Sulawesi Tenggara</option>
+                    <option value="Sulawesi Barat">Sulawesi Barat</option>
+                    <option value="Gorontalo">Gorontalo</option>
+                    <option value="Maluku">Maluku</option>
+                    <option value="Maluku Utara">Maluku Utara</option>
+                    <option value="Papua">Papua</option>
+                    <option value="Papua Barat">Papua Barat</option>
+                  </select>
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="email">Email</label>
-              <div class="col-sm-12">
-                <input type="email" class="form-control" name="email"
-                  value=<?php echo $data['email']; ?> >
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Email</label>
+                <div class="col-sm-12">
+                  <input type="email" class="form-control" name="email" value=<?php echo $data['email']; ?>>
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-            <button type="submit" class="btn btn-outline-info tmbl">Ubah </button> 
-            </div>
-          </form>
+              <div class="form-group">
+                <button type="submit" class="btn btn-outline-info tmbl">Ubah </button>
+              </div>
+            </form>
           </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+          <div class="card-footer small text-muted">Updated <?php date_default_timezone_set('Asia/Jakarta'); $tgl = date('l, d-m-Y h:i:sa'); echo $tgl;?></div>
         </div>
 
 
