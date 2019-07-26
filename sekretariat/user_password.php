@@ -118,8 +118,8 @@
             <i class="fas fa-list"></i>
             Ubah Password
             <div style="float:right">
-                [ <a href="detail.php">Lihat Profile</a> ]
-                [ <a href="profile.php">Ubah Profile</a> ]
+                <a href="detail.php" class="btn btn-primary mr-2">Lihat Profile</a>
+                <a href="profile.php" class="btn btn-primary">Ubah Profile</a>
               </div>
           </div>
           <div class="card-body">
@@ -172,7 +172,7 @@
             </div>
           </form>
           </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+          <div class="card-footer small text-muted">Updated <?php date_default_timezone_set('Asia/Jakarta'); $tgl = date('l, d-m-Y h:i:sa'); echo $tgl;?></div>
         </div>
 
 

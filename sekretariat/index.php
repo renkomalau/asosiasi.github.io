@@ -109,7 +109,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
+            <a href="index.php">Dashboard</a>
           </li>
           <li class="breadcrumb-item active">Data Anggota</li>
         </ol>
@@ -141,7 +141,7 @@
                     <td class="text-center"><?php echo $data['nik']; ?></td>
                     <td class="text-center"><?php echo $data['nama']; ?></td>
                     <td class="text-center"><?php echo $data['status']; ?></td>
-                    <td class="text-center"><a style="margin-right:15px" href="detail_anggota.php?nik=<?php echo $data['nik']; ?>">Detail</a><a href="approve.php?nik=<?php echo $data['nik']; ?>">Approve</a></td>
+                    <td class="text-center"><a style="margin-right:15px" href="detail_anggota.php?nik=<?php echo $data['nik']; ?>"class="btn btn-info">Detail</a><a class="btn btn-success" href="approve.php?nik=<?php echo $data['nik']; ?>" onclick="javascript:return confirm('Approve Data ?');">Approve</a></td>
                   </tr>
               <?php } ?>
         </tbody>
@@ -157,7 +157,7 @@
     </table>
 
           </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+          <div class="card-footer small text-muted">Updated <?php date_default_timezone_set('Asia/Jakarta'); $tgl = date('l, d-m-Y h:i:sa'); echo $tgl;?></div>
         </div>
 
 
