@@ -10,40 +10,40 @@
   <meta name="author" content="">
 
   <?php
-  
-      session_start();
-  
-      if(!isset($_SESSION['akses'])){
-        header("location:../../index.php");
-      }else{
-        if($_SESSION['akses'] !== "Ketua"){
-          header("location:../../".$_SESSION['akses']);
-        }
-      }
-  
 
-    
-    //mengisi session
-    $nik = $_SESSION['nik'];
+  session_start();
 
-    //mengecek session
-    if(!isset($_SESSION['akses'])){
-        header("location: ../");
-        $akses = $_SESSION['akses'];
-      if($akses !== "Admin"){
-        header("location: ../".$_SESSION['akses']."/");
-      }
+  if (!isset($_SESSION['akses'])) {
+    header("location:../../index.php");
+  } else {
+    if ($_SESSION['akses'] !== "Ketua") {
+      header("location:../../" . $_SESSION['akses']);
     }
+  }
 
 
-    //menampilkan pesan password salah dan kurang tepat
-    if(isset($_GET['wrong'])){
-      echo "<script> alert('Password lama tidak cocok'); </script>";
+
+  //mengisi session
+  $nik = $_SESSION['nik'];
+
+  //mengecek session
+  if (!isset($_SESSION['akses'])) {
+    header("location: ../");
+    $akses = $_SESSION['akses'];
+    if ($akses !== "Admin") {
+      header("location: ../" . $_SESSION['akses'] . "/");
     }
+  }
 
-    if(isset($_GET['mismatch'])){
-      echo "<script> alert('Password baru tidak cocok dengan konfirmasi'); </script>";
-    }
+
+  //menampilkan pesan password salah dan kurang tepat
+  if (isset($_GET['wrong'])) {
+    echo "<script> alert('Password lama tidak cocok'); </script>";
+  }
+
+  if (isset($_GET['mismatch'])) {
+    echo "<script> alert('Password baru tidak cocok dengan konfirmasi'); </script>";
+  }
   ?>
 
   <title>Ketua - Password Setting</title>
@@ -57,14 +57,14 @@
   <!-- Custom styles for this template-->
   <link href="../style/sb-admin.css" rel="stylesheet">
 
-    <style>
-      .tmbl{
-        width:20%;
-        margin-top: 20px;
-        margin-left: 40%;
+  <style>
+    .tmbl {
+      width: 20%;
+      margin-top: 20px;
+      margin-left: 40%;
 
-      }
-    </style>
+    }
+  </style>
 
 </head>
 
@@ -73,17 +73,17 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand navbar-dark bg-info static-top">
 
-  <a class="navbar-brand mr-1" href="index.php"><img src="../img/logo1.png" height="35px" style="background-color:whte;"></a>
+    <a class="navbar-brand mr-1" href="index.php"><img src="../img/logo1.png" height="35px" style="background-color:whte;"></a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
 
     <div class="navbar ml-auto text-white">
-     <i class="fas fa-fw fa-user-circle" style="margin-right:5px"></i>
-        <?php
-          echo $_SESSION['nama']. " (". $_SESSION['akses'].")";
-        ?>
+      <i class="fas fa-fw fa-user-circle" style="margin-right:5px"></i>
+      <?php
+      echo $_SESSION['nama'] . " (" . $_SESSION['akses'] . ")";
+      ?>
     </div>
 
   </nav>
@@ -131,15 +131,15 @@
         <div class="card mb-3">
           <div class="card-header inline-block">
             <i class="fas fa-list"></i>
-            Lihat Profile
-              <div style="float:right">
-              [ <a href="detail.php">Lihat Profile</a> ]
-                [ <a href="profile.php">Ubah Profile</a> ]
-              </div>
+            Ubah Password
+            <div style="float:right">
+              <a href="detail.php" class="btn btn-primary mr-2">Lihat Profile</a>
+              <a href="profile.php"class="btn btn-primary">Ubah Profile</a>
+            </div>
           </div>
           <div class="card-body">
 
-          <?php
+            <?php
             //koneksi
             include "../koneksi.php";
 
@@ -147,47 +147,45 @@
             $query = mysqli_query($conn, "select * from pengguna where nik='$nik'");
             $data = mysqli_fetch_array($query);
 
-          ?>
+            ?>
 
-          <form class="form-horizontal" action="ubah_password.php" method="POST">
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="nik">NIK</label>
-              <div class="col-sm-12">
-                <input type="number" class="form-control" id="nik" 
-                  value=<?php echo $data['nik']; ?> disabled>
+            <form class="form-horizontal" action="ubah_password.php" method="POST">
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="nik">NIK</label>
+                <div class="col-sm-12">
+                  <input type="number" class="form-control" id="nik" value=<?php echo $data['nik']; ?> disabled>
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="pwlama">Password Lama</label>
-              <div class="col-sm-12">
-                <input type="password" class="form-control" name="pwlama" 
-                  placeholder="Password Lama" maxlength=12>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="pwlama">Password Lama</label>
+                <div class="col-sm-12">
+                  <input type="password" class="form-control" name="pwlama" placeholder="Password Lama" maxlength=12>
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-            <label class="control-label col-sm-2" for="pwbaru">Password Baru</label>
-              <div class="col-sm-12">
-                <input type="password" class="form-control" name="pwbaru" 
-                  placeholder="Password Baru" maxlength=12>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="pwbaru">Password Baru</label>
+                <div class="col-sm-12">
+                  <input type="password" class="form-control" name="pwbaru" placeholder="Password Baru" maxlength=12>
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-            <label class="control-label col-sm-5" for="pwd">Konfirmasi Password Baru</label>
-              <div class="col-sm-12">
-                <input type="password" class="form-control" name="pwd" 
-                  placeholder="Konfirmasi Password Baru" maxlength=12>
+              <div class="form-group">
+                <label class="control-label col-sm-5" for="pwd">Konfirmasi Password Baru</label>
+                <div class="col-sm-12">
+                  <input type="password" class="form-control" name="pwd" placeholder="Konfirmasi Password Baru" maxlength=12>
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-            <button type="submit" class="btn btn-outline-info tmbl">Ubah </button> 
-            </div>
-          </form>
+              <div class="form-group">
+                <button type="submit" class="btn btn-outline-info tmbl">Ubah </button>
+              </div>
+            </form>
           </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+          <div class="card-footer small text-muted">Updated <?php date_default_timezone_set('Asia/Jakarta');
+                                                            $tgl = date('l, d-m-Y h:i:sa');
+                                                            echo $tgl; ?></div>
         </div>
 
 

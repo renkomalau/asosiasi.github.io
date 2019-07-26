@@ -122,10 +122,10 @@
         <div class="card mb-3">
           <div class="card-header inline-block">
             <i class="fas fa-list"></i>
-            Lihat Profile
+            Ubah Profile
               <div style="float:right">
-              [ <a href="detail.php">Lihat Profile</a> ]
-                [ <a href="user_password.php">Ubah Password</a> ]
+              <a href="detail.php" class="btn btn-primary mr-2">Lihat Profile</a>
+              <a href="user_password.php" class="btn btn-danger">Ubah Password</a>
               </div>
           </div>
           <div class="card-body">
@@ -229,7 +229,7 @@
             </div>
           </form>
           </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+          <div class="card-footer small text-muted">Updated <?php date_default_timezone_set('Asia/Jakarta'); $tgl = date('l, d-m-Y h:i:sa'); echo $tgl;?></div>
         </div>
 
 

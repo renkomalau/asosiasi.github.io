@@ -105,7 +105,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
+            <a href="index.php">Dashboard</a>
           </li>
           <li class="breadcrumb-item active">Profile</li>
         </ol>
@@ -116,8 +116,8 @@
             <i class="fas fa-list"></i>
             Lihat Profile
               <div style="float:right">
-                [ <a href="profile.php">Ubah Profile</a> ]
-                [ <a href="user_password.php">Ubah Password</a> ]
+                <a href="profile.php" class="btn btn-primary mr-2">Ubah Profile</a> 
+                <a href="user_password.php" class="btn btn-danger">Ubah Password</a> 
               </div>
           </div>
           <div class="card-body">
